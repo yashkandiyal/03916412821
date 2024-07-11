@@ -15,7 +15,13 @@ const thirdPartyAPIs = {
 
 const fetchNumber = async (type) => {
   try {
-    const response = await axios.get(thirdPartyAPIs[type], { timeout: 500 });
+      const response = await axios.get(thirdPartyAPIs[type], { timeout: 500 }, {
+        headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+          },
+          
+    });
     if (response.data && response.data.number) {
       return response.data.number;
     }
@@ -67,5 +73,5 @@ app.get('/numbers/:type', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Average Calculator microservice running at http://localhost:${port}`);
+  console.log(`port running at http://localhost:${port}`);
 })
